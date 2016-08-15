@@ -1,3 +1,18 @@
+/**
+ * Create an array of arrays which spirals integers 
+ * in a clockwise fashion.
+ * [[1, 2, 3]
+ *  [8, 9, 4]
+ *  [7, 6, 5]]
+ * 
+ * @param rows int The number of rows desired in the spiral
+ * @param columns int The number of coulumns desired in the spiral
+ * 
+ * @return Array The spiral matrix
+*/
+
+
+
 function spiral(rows, columns) {
   var count = 1;
   var currentRow = 0;
