@@ -4,32 +4,41 @@
 *arr numbers come up twice in a row with exactly k prime factors?
 **/
 
+const consec_Kprimes = (k, arr) => {
+  return doubleOccurence(arr.map(findPrimeFactors), k)
+}
 
+console.log(consec_Kprimes(2, [10123, 10122, 10132, 10129, 10145, 10148, 10147, 10135, 10146, 10134]))
 
-
-
-
-
-
-factorcount = (arr) => {
-  for(var i = 0; i < arr.length; i++) {
-    
+//Returns an integer indicating how many double occurences of k were found within arr
+function doubleOccurence(arr, k) {
+  let result = 0
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i + 1]) {
+      if(arr[i].length === k && arr[i + 1].length === k ) {
+        result++
+      }
+      
+    }
   }
-} 
+  return result
+}
 
-findPrimeFactors = (number) => {
 
-  for(var i = 2; i < number; i++) {
+//returns an [] of the prime factors of input
+function findPrimeFactors(number) {
+
+  for(let i = 2; i < number; i++) {
     if(number % i === 0) {
-      // [i].concat(number / i)
       return [i].concat(findPrimeFactors(number / i))
     }
   }
   return [number]
 }
 
+//return true boolean of prime numbers
 isPrime = (num) => {
-  for(var i = 2; i < num; i++) {
+  for(let i = 2; i < num; i++) {
     if(num % i === 0) {
       return false
     }
@@ -51,6 +60,13 @@ describe('#isPrime', function() {
   })
 })
 
+describe('#consec_Kprimes', function(){
+  it('returns the number of times 2 numbers consecutively have k prime factors', function(){
+      expect(consec_Kprimes(4, [10175, 10185, 10180, 10197])).to.equal(3)
+      expect(consec_Kprimes(2, [10123, 10122, 10132, 10129, 10145, 10148, 10147, 10135, 10146, 10134])).to.equal(2)
+  }) 
+})
+
 describe('#findPrimeFactors', function() {
   it('returns the prime factors of an integer', function() {
     expect(findPrimeFactors(1)).to.eql([1])
@@ -64,6 +80,7 @@ describe('#findPrimeFactors', function() {
   })
 
 })
+
 
 // findPrimeFactors(1) => [1]
 // findPrimeFactors(2) => [2]
