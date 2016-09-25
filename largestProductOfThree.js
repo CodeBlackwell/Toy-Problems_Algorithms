@@ -10,41 +10,53 @@
 
 var largestProductOfThree = function(array) {
 
-  function swap(chars, i, j) {
-    var tmp = chars[i]
-    chars[i] = chars[j]
-    chars[j] = tmp
-  }
+  function generateAnagrams(word) {
 
-  function getAnagrams(input) {
-      var counter = [],
-          anagrams = [],
-          chars = input.split(''),
-          length = chars.length,
-          i
+    if (word.length < 2) {
 
-      for (i = 0; i < length; i++) {
-          counter[i] = 0
-      }
+      return [word]
 
-      anagrams.push(input)
-      i = 0
-      while (i < length) {
-          if (counter[i] < i) {
-              swap(chars, i % 2 === 1 ? counter[i] : 0, i)
-              counter[i]++
-              i = 0
-              anagrams.push(chars.join(''))
-          } else {
-              counter[i] = 0
-              i++
-          }
+    } else {
+
+    // By declaring all variables outside of the loop,
+    // we improve efficiency, avoiding the needless
+    // declarations each time.
+
+      var anagrams = []
+      var before, focus, after
+      var shortWord, subAnagrams, newEntry
+
+      for (var i = 0; i < word.length; i++) {
+
+        before = word.slice(0, i)
+        focus = word[i]
+        after = word.slice(i + 1, word.length + 1)
+        shortWord = before + after
+        subAnagrams = generateAnagrams(shortWord)
+        console.log({ 
+          before,
+          focus,
+          after,
+          shortWord,
+          subAnagrams
+        })
+
+        for (var j = 0; j < subAnagrams.length; j++){
+
+          newEntry = focus + subAnagrams[j]
+          anagrams.push(newEntry)
+
+        }
+
       }
 
       return anagrams
+
+    }
+
   }
 
-  return getAnagrams(array)
+  generateAnagrams(array)
 
 }
 
