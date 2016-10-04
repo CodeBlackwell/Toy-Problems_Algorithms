@@ -1,6 +1,6 @@
 var expect = require('chai').expect
 
-function generateAnagrams(word) {
+function permute(word) {
 
   if(word.length === 0){
     return []
@@ -22,7 +22,7 @@ function generateAnagrams(word) {
     focus = word.slice(i, i + 1);
     after = word.slice(i + 1, word.length + 1);
     shortWord = before.concat(after)
-    subAnagrams = generateAnagrams(shortWord);
+    subAnagrams = permute(shortWord);
 
     console.log({
         before,
@@ -48,22 +48,22 @@ function generateAnagrams(word) {
 
 
 
-describe("#generateAnagrams", function(){
+describe("#permute", function(){
   it("returns permutations of a given string", function(){
-    expect(generateAnagrams('')).to.eql([])
-    expect(generateAnagrams('a')).to.eql(['a'])
-    expect(generateAnagrams('ab')).to.eql(['ab', 'ba'])
-    expect(generateAnagrams('abc')).to.eql(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+    expect(permute('')).to.eql([])
+    expect(permute('a')).to.eql(['a'])
+    expect(permute('ab')).to.eql(['ab', 'ba'])
+    expect(permute('abc')).to.eql(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
   })
   it("returns permutations of a given array", function(){
-    expect(generateAnagrams([])).to.eql([])
-    expect(generateAnagrams(['a'])).to.eql([['a']])
-    expect(generateAnagrams(['a', 'b'])).to.eql([['a', 'b'], ['b', 'a']])
-    expect(generateAnagrams(['a', 'b', 'c'])).to.eql([['a', 'b', 'c'], ['a', 'c', 'b'], ['b', 'a', 'c'], ['b', 'c', 'a'], ['c', 'a', 'b'], ['c', 'b', 'a']])
+    expect(permute([])).to.eql([])
+    expect(permute(['a'])).to.eql([['a']])
+    expect(permute(['a', 'b'])).to.eql([['a', 'b'], ['b', 'a']])
+    expect(permute(['a', 'b', 'c'])).to.eql([['a', 'b', 'c'], ['a', 'c', 'b'], ['b', 'a', 'c'], ['b', 'c', 'a'], ['c', 'a', 'b'], ['c', 'b', 'a']])
   })
 })
 
 
 
 
-// console.log(generateAnagrams("abc"))
+// console.log(permute("abc"))
